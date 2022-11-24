@@ -13,7 +13,7 @@ class GenreController extends Controller
 {
     public function index()
     {
-        return new GenreCollection(Genre::paginate(10));
+        return new GenreCollection(Genre::paginate(6));
     }
 
     public function store(StoreGenreRequest $request)

@@ -12,7 +12,7 @@ class DeveloperController extends Controller
 {
     public function index()
     {
-        return new DeveloperCollection(Developer::paginate(10));
+        return new DeveloperCollection(Developer::paginate(6));
     }
 
     public function store(StoreDeveloperRequest $request)
