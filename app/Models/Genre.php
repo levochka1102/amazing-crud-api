@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -17,14 +18,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Game[] $games
  * @property-read int|null $games_count
- * @method static \Illuminate\Database\Eloquent\Builder|Genre newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Genre newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Genre query()
- * @method static \Illuminate\Database\Eloquent\Builder|Genre whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Genre whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Genre whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Genre whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Genre whereUpdatedAt($value)
+ * @method static Builder|Genre newModelQuery()
+ * @method static Builder|Genre newQuery()
+ * @method static Builder|Genre query()
+ * @method static Builder|Genre whereCreatedAt($value)
+ * @method static Builder|Genre whereDeletedAt($value)
+ * @method static Builder|Genre whereId($value)
+ * @method static Builder|Genre whereName($value)
+ * @method static Builder|Genre whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Genre extends Model

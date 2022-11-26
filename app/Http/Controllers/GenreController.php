@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GenreIndexRequest;
 use App\Http\Requests\StoreGenreRequest;
 use App\Http\Resouces\GenreCollection;
 use App\Http\Resouces\GenreResource;
@@ -11,9 +12,13 @@ use Illuminate\Http\Response;
 
 class GenreController extends Controller
 {
-    public function index()
+    public function index(GenreIndexRequest $request)
     {
-        return new GenreCollection(Genre::paginate(6));
+        $validated = $request->validated();
+        return new GenreCollection(Genre::query()
+            ->when($validated['search'], fn($query) => $query->where('name', 'like', '%' . $validated['search'] . '%'))
+            ->paginate($validated['limit'])
+        );
     }
 
     public function store(StoreGenreRequest $request)
@@ -37,5 +42,10 @@ class GenreController extends Controller
     {
         $genre->delete();
         return response()->json("Genre was deleted");
+    }
+
+    public function all()
+    {
+        return new GenreCollection(Genre::all());
     }
 }
