@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->foreignIdFor(Genre::class)->constrained()->onDelete('cascade');
             $table->primary(['game_id', 'genre_id']);
 
+            $table->unique(['game_id', 'genre_id']);
             $table->timestamps();
             $table->softDeletes();
         });
