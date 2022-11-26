@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Builders\DeveloperBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -23,6 +24,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Developer whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Developer whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Developer whereUpdatedAt($value)
+ * @method Developer search(string $name)
  * @mixin \Eloquent
  */
 class Developer extends Model
@@ -36,5 +38,10 @@ class Developer extends Model
     public function games(): HasMany
     {
         return $this->hasMany(Game::class);
+    }
+
+    public function newEloquentBuilder($query): DeveloperBuilder
+    {
+        return new DeveloperBuilder($query);
     }
 }

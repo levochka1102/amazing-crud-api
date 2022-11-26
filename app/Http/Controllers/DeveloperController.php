@@ -10,6 +10,14 @@ use Illuminate\Http\Request;
 
 class DeveloperController extends Controller
 {
+    public function all(Request $request)
+    {
+        return new DeveloperCollection(Developer::query()
+            ->when((bool)$request->search, fn($query) => $query->search($request->search))
+            ->get()
+        );
+    }
+
     public function index()
     {
         return new DeveloperCollection(Developer::paginate(6));
