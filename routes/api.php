@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DeveloperController;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\GenreController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,5 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('genre/all', [GenreController::class, 'all']);
 Route::apiResource('genre', GenreController::class);
 Route::apiResource('developer', DeveloperController::class);
+Route::apiResource('game', GameController::class);
