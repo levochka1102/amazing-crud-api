@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Http\Builders\GenreBuilder;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -36,8 +38,23 @@ class Genre extends Model
         'name',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function name(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => ucfirst($value),
+//            set: fn ($value) => strtolower($value),
+        );
+    }
     public function games(): BelongsToMany
     {
         return $this->belongsToMany(Game::class);
+    }
+
+    public function newEloquentBuilder($query): GenreBuilder
+    {
+        return new GenreBuilder($query);
     }
 }

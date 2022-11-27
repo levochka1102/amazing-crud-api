@@ -12,11 +12,19 @@ use Illuminate\Http\Response;
 
 class GenreController extends Controller
 {
+    public function all(Request $request)
+    {
+        return new GenreCollection(Genre::query()
+            ->when((bool)$request->search, fn($query) => $query->search($request->search))
+            ->get()
+        );
+    }
+
     public function index(GenreIndexRequest $request)
     {
         $validated = $request->validated();
         return new GenreCollection(Genre::query()
-            ->when($validated['search'], fn($query) => $query->where('name', 'like', '%' . $validated['search'] . '%'))
+            ->when($validated['search'], fn($query) => $query->search($validated['search']))
             ->paginate($validated['limit'])
         );
     }
@@ -42,10 +50,5 @@ class GenreController extends Controller
     {
         $genre->delete();
         return response()->json("Genre was deleted");
-    }
-
-    public function all()
-    {
-        return new GenreCollection(Genre::all());
     }
 }

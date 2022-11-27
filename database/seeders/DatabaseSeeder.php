@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
 //        ]);
 
         $genresNames = [
-            'Ужасы', 'Детектив', 'Шутер', 'Рогалик', 'Приключение', 'Платформер', 'Головоломки', 'Аркады'
+            'Horror', 'Detective', 'Shooter', 'Roguelike', 'Adventure', 'Puzzle', 'Arcade'
         ];
 
         $genres = Genre::factory()

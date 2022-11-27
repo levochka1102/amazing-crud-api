@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DeveloperIndexRequest;
 use App\Http\Requests\StoreDeveloperRequest;
 use App\Http\Resouces\DeveloperCollection;
 use App\Http\Resouces\DeveloperResource;
@@ -18,9 +19,13 @@ class DeveloperController extends Controller
         );
     }
 
-    public function index()
+    public function index(DeveloperIndexRequest $request)
     {
-        return new DeveloperCollection(Developer::paginate(6));
+        $validated = $request->validated();
+        return new DeveloperCollection(Developer::query()
+            ->when($validated['search'], fn($query) => $query->search($validated['search']))
+            ->paginate($validated['limit'])
+        );
     }
 
     public function store(StoreDeveloperRequest $request)
