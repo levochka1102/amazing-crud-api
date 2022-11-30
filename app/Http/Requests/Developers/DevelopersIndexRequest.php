@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Developers;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GameIndexRequest extends FormRequest
+class DevelopersIndexRequest extends FormRequest
 {
     public function rules(): array
     {
@@ -12,8 +12,6 @@ class GameIndexRequest extends FormRequest
             'search' => ['present'],
             'limit' => ['required', 'numeric'],
             'page' => ['required', 'numeric'],
-            'genres_ids' => ['present'],
-            'developers_ids' => ['present'],
         ];
     }
 

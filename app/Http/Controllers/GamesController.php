@@ -2,23 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\GameIndexRequest;
-use App\Http\Requests\StoreGameRequest;
-use App\Http\Resouces\GameCollection;
-use App\Http\Resouces\GameResource;
+use App\Http\Requests\Games\GamesIndexRequest;
+use App\Http\Requests\Games\StoreGamesRequest;
+use App\Http\Resouces\Games\GamesCollection;
+use App\Http\Resouces\Games\GamesResource;
 use App\Models\Game;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 
-class GameController extends Controller
+class GamesController extends Controller
 {
-    public function index(GameIndexRequest $request)
+    public function index(GamesIndexRequest $request)
     {
         $validated = $request->validated();
         $genresIds = array_filter(explode(', ', $validated['genres_ids']));
         $developersIds = array_filter(explode(', ', $validated['developers_ids']));
         $search = $validated['search'];
-        return new GameCollection(Game::query()
+        return new GamesCollection(Game::query()
             ->when($search, fn($query) => $query->search($search))
             ->when($genresIds, fn($query) => $query->whereHasGenresIds($genresIds))
             ->when($developersIds, fn($query) => $query->whereHasDevelopersIds($developersIds))
@@ -26,7 +24,7 @@ class GameController extends Controller
         );
     }
 
-    public function store(StoreGameRequest $request)
+    public function store(StoreGamesRequest $request)
     {
         $validated = $request->validated();
         $game = Game::create([
@@ -39,10 +37,10 @@ class GameController extends Controller
 
     public function show(Game $game)
     {
-        return new GameResource($game);
+        return new GamesResource($game);
     }
 
-    public function update(StoreGameRequest $request, Game $game)
+    public function update(StoreGamesRequest $request, Game $game)
     {
         $validated = $request->validated();
         $game->update([

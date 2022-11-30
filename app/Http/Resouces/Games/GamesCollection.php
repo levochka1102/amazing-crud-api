@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Resouces;
+namespace App\Http\Resouces\Games;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 /** @see \App\Models\Game */
-class GameCollection extends ResourceCollection
+class GamesCollection extends ResourceCollection
 {
     /**
      * @param Request $request

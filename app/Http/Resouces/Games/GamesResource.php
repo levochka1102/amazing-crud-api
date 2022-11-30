@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Resouces;
+namespace App\Http\Resouces\Games;
 
+use App\Http\Resouces\Developers\DevelopersResource;
+use App\Http\Resouces\Genres\GenresCollection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /** @mixin \App\Models\Game */
-class GameResource extends JsonResource
+class GamesResource extends JsonResource
 {
     /**
      * @param Request $request
@@ -17,8 +19,8 @@ class GameResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'developer' => new DeveloperResource($this->developer),
-            'genres' => new GenreCollection($this->genres),
+            'developer' => new DevelopersResource($this->developer),
+            'genres' => new GenresCollection($this->genres),
         ];
     }
 }

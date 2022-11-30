@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Resouces;
+namespace App\Http\Resouces\Genres;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 /** @see \App\Models\Genre */
-class GenreCollection extends ResourceCollection
+class GenresCollection extends ResourceCollection
 {
     /**
      * @param Request $request

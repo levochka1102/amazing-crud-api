@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Games;
 
-use App\Models\Game;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreGameRequest extends FormRequest
+class StoreGamesRequest extends FormRequest
 {
     public function rules(): array
     {

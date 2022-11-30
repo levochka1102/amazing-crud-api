@@ -2,40 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\GenreIndexRequest;
-use App\Http\Requests\StoreGenreRequest;
-use App\Http\Resouces\GenreCollection;
-use App\Http\Resouces\GenreResource;
+use App\Http\Requests\Genres\GenresIndexRequest;
+use App\Http\Requests\Genres\StoreGenresRequest;
+use App\Http\Resouces\Genres\GenresCollection;
+use App\Http\Resouces\Genres\GenresResource;
 use App\Models\Genre;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
-class GenreController extends Controller
+class GenresController extends Controller
 {
     public function all(Request $request)
     {
-        return new GenreCollection(Genre::query()
+        return new GenresCollection(Genre::query()
             ->when((bool)$request->search, fn($query) => $query->search($request->search))
             ->get()
         );
     }
 
-    public function index(GenreIndexRequest $request)
+    public function index(GenresIndexRequest $request)
     {
         $validated = $request->validated();
-        return new GenreCollection(Genre::query()
+        return new GenresCollection(Genre::query()
             ->when($validated['search'], fn($query) => $query->search($validated['search']))
             ->paginate($validated['limit'])
         );
     }
 
-    public function store(StoreGenreRequest $request)
+    public function store(StoreGenresRequest $request)
     {
         Genre::create($request->validated());
         return response()->json("Genre was created");
     }
 
-    public function update(StoreGenreRequest $request, Genre $genre)
+    public function update(StoreGenresRequest $request, Genre $genre)
     {
         $genre->update($request->validated());
         return response()->json("Genre was updated");
@@ -43,7 +42,7 @@ class GenreController extends Controller
 
     public function show(Genre $genre)
     {
-        return new GenreResource($genre);
+        return new GenresResource($genre);
     }
 
     public function destroy(Genre $genre)

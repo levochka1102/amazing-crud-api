@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Genres;
 
 use App\Models\Genre;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreGenreRequest extends FormRequest
+class StoreGenresRequest extends FormRequest
 {
     public function rules(): array
     {

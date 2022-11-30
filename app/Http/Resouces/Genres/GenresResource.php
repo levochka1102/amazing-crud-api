@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Resouces;
+namespace App\Http\Resouces\Genres;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-/** @mixin \App\Models\Developer */
-class DeveloperResource extends JsonResource
+/** @mixin \App\Models\Genre */
+class GenresResource extends JsonResource
 {
     /**
      * @param Request $request
@@ -17,6 +17,7 @@ class DeveloperResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'games_count' => $this->games_count,
         ];
     }
 }
