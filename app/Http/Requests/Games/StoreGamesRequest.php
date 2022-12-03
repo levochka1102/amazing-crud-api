@@ -10,9 +10,11 @@ class StoreGamesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'min:2', 'string', Rule::unique('games')->ignore($this->game)],
-            'developer_id' => ['required'],
-            'genres_ids' => ['required'],
+            'name'        => ['required', 'min:2', 'string', Rule::unique('games')->ignore($this->game)],
+            'developer'   => ['required', 'integer'],
+            'genres'      => ['required'],
+            'genres.*'    => ['array:id'],
+            'genres.*.id' => ['integer'],
         ];
     }
 

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Http\Builders\GameBuilder;
+use Barryvdh\LaravelIdeHelper\Eloquent;
+use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -31,8 +33,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static Builder|Game whereName($value)
  * @method static Builder|Game whereUpdatedAt($value)
  * @method Game search(string $name)
- * @method Game whereHasGenresIds(array $ids)
- * @mixin \Eloquent
+ * @method Game searchGenres(Collection $collection)
+ * @method Game searchDeveloper(Collection $collection)
+ * @mixin Eloquent
  */
 class Game extends Model
 {
