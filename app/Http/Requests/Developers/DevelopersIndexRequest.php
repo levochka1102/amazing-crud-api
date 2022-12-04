@@ -9,9 +9,9 @@ class DevelopersIndexRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'search' => ['present'],
-            'limit' => ['required', 'numeric'],
             'page' => ['required', 'numeric'],
+            'limit' => ['required', 'numeric'],
+            'search' => ['present'],
         ];
     }
 

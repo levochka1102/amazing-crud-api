@@ -47,7 +47,14 @@ class DevelopersController extends Controller
 
     public function destroy(Developer $developer)
     {
-        $developer->delete();
-        return response()->json("Developer was deleted");
+        if ($developer->games()->exists()) {
+            return response()->json([
+                'message' => sprintf('Developer "%s" cannot be deleted because it has %d games', $developer->name, $developer->games()->count())
+            ], 422);
+        }
+        else {
+            $developer->delete();
+            return response()->json($developer);
+        }
     }
 }

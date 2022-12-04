@@ -47,7 +47,14 @@ class GenresController extends Controller
 
     public function destroy(Genre $genre)
     {
-        $genre->delete();
-        return response()->json("Genre was deleted");
+        if ($genre->games()->exists()) {
+            return response()->json([
+                'message' => sprintf('Genre "%s" cannot be deleted because it has %d games', $genre->name, $genre->games()->count())
+            ], 422);
+        }
+        else {
+            $genre->delete();
+            return response()->json($genre);
+        }
     }
 }
